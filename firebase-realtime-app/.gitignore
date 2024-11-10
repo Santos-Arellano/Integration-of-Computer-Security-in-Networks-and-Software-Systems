@@ -66,3 +66,6 @@ coverage/
 
 # Generated files
 expo-env.d.ts
+
+# Ignorar el archivo firebase.ts
+app/firebase.ts

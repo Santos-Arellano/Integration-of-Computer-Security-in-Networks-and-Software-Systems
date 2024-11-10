@@ -10,6 +10,7 @@ export default function InputScreen() {
   const [semestre, setSemestre] = useState('');
 
   const guardarDatos = async () => {
+    // Guardar en Firestore
     try {
       await addDoc(collection(db, "usuarios"), {
         matricula,
@@ -17,13 +18,33 @@ export default function InputScreen() {
         semestre,
         timestamp: new Date()
       });
+      alert('Datos guardados en Firestore exitosamente');
+    } catch (error) {
+      console.error("Error al guardar en Firestore:", error);
+      alert('Error al guardar en Firestore');
+    }
+
+    // Guardar en la API local
+    try {
+      const response = await fetch('http://localhost:3000/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ matricula, nombre, semestre }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al guardar en la API local');
+      }
+
+      alert('Datos guardados en la API local exitosamente');
       setMatricula('');
       setNombre('');
       setSemestre('');
-      alert('Datos guardados exitosamente');
     } catch (error) {
-      console.error("Error al guardar:", error);
-      alert('Error al guardar los datos');
+      console.error("Error al guardar en la API local:", error);
+      alert('Error al guardar en la API local');
     }
   };
 
