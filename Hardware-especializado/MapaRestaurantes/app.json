@@ -30,6 +30,7 @@
           "locationAlwaysAndWhenInUsePermission": "La app necesita acceso a tu ubicación para mostrar restaurantes cercanos."
         }
       ]
-    ]
+    ],
+    "sdkVersion": "52.0.0" 
   }
 }
